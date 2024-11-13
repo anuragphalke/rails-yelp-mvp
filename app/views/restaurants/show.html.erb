@@ -1,0 +1,43 @@
+<br><br>
+<div class="text-center">
+  <%= link_to restaurant_path(@restaurant), class: 'btn btn-dark w-50 text-left mb-4' do %>
+    <strong><%= @restaurant.name %></strong>
+  <% end %>
+
+  <div class="mb-4">
+    <%= link_to restaurant_path(@restaurant), class: 'btn btn-light w-50 text-left mb-2' do %>
+      <span><%= @restaurant.address %></span>
+    <% end %>
+    <%= link_to restaurant_path(@restaurant), class: 'btn btn-light w-50 text-left mb-2' do %>
+      <span><%= @restaurant.phone_number %></span>
+    <% end %>
+    <%= link_to restaurant_path(@restaurant), class: 'btn btn-light w-50 text-left mb-2' do %>
+      <em><%= @restaurant.category.capitalize %></em>
+    <% end %>
+  </div>
+
+  <h2 class="text-center mb-4">Reviews</h2>
+
+  <% if @restaurant.reviews.any? %>
+    <ul class="list-unstyled">
+      <% @restaurant.reviews.each do |review| %>
+        <li class="mb-2 text-center">
+
+          <div class="btn w-15 text-center" style="background-color: <%= rating_color(review.rating) %>; color: white;">
+            <strong><%= review.rating %></strong>
+          </div>
+
+          <div class="btn btn-light w-50 text-left" style="display: inline-block;">
+            <%= review.content %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No reviews yet. Be the first to review this restaurant!</p>
+  <% end %>
+
+  <div class="text-center mt-4">
+    <%= link_to 'Add a Review', new_restaurant_review_path(@restaurant), class: 'btn btn-primary' %>
+  </div>
+</div>

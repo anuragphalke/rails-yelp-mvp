@@ -1,12 +1,25 @@
-<h1>All Restaurants</h1>
+<br><br>
+<h1 class="text-center mb-4">All Restaurants</h1>
+<br>
 
-<ul>
+<div class="text-center mb-4">
+  <%= link_to 'Add Restaurant', new_restaurant_path, class: 'btn btn-primary' %>
+</div>
+
+<ul class="list-unstyled">
   <% @restaurants.each do |restaurant| %>
-    <li>
-      <strong><%= restaurant.name %></strong><br>
-      <%= restaurant.address %><br>
-      <%= restaurant.phone_number %><br>
-      <em><%= restaurant.category.capitalize %></em>
+    <li class="mb-4 text-center">
+      <!-- Restaurant Title Button -->
+      <%= link_to restaurant_path(restaurant), class: 'btn btn-dark w-50 text-left mb-2' do %>
+        <strong><%= restaurant.name %></strong>
+      <% end %>
+
+      <!-- Restaurant Details Button (Description) -->
+      <%= link_to restaurant_path(restaurant), class: 'btn btn-light w-50 text-left' do %>
+        <span><%= restaurant.address %></span><br>
+        <span><%= restaurant.phone_number %></span><br>
+        <em><%= restaurant.category.capitalize %></em>
+      <% end %>
     </li>
   <% end %>
 </ul>

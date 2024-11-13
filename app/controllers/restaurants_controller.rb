@@ -11,7 +11,7 @@ class RestaurantsController < ApplicationController
     @restaurant = Restaurant.new(restaurant_params)
 
     if @restaurant.save
-      redirect_to @restaurant, notice: "Restaurant created!"
+      redirect_to restaurants_path, notice: 'Restaurant created!'
     else
       render :new
     end
@@ -19,6 +19,7 @@ class RestaurantsController < ApplicationController
 
   def show
     @restaurant = Restaurant.find(params[:id])
+    @reviews = @restaurant.reviews
   end
 
   private
