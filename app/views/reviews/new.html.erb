@@ -1,30 +1,43 @@
-<h1>Write a Review for <%= @restaurant.name %></h1>
+<br><br>
 
-<%= form_with(model: [@restaurant, @review], local: true) do |form| %>
-  <% if @review.errors.any? %>
-    <div>
-      <h2><%= pluralize(@review.errors.count, "error") %> prohibited this review from being saved:</h2>
-      <ul>
-        <% @review.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+<div class="container">
+  <h1 class="text-center mb-4">Write a Review for <%= @restaurant.name %></h1>
+
+  <%= form_with(model: [@restaurant, @review], local: true) do |form| %>
+
+    <!-- Error messages -->
+    <% if @review.errors.any? %>
+      <div id="error_explanation" class="alert alert-danger text-center mb-4">
+        <h2><%= pluralize(@review.errors.count, "error") %> prohibited this review from being saved:</h2>
+        <ul>
+          <% @review.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <!-- Rating Field -->
+    <div class="form-group text-center mb-4">
+      <%= form.label :rating, class: 'btn btn-dark w-50 mx-auto text-left' %>
+      <%= form.number_field :rating, in: 0..5, class: 'form-control w-50 mx-auto' %>
     </div>
+
+    <!-- Content Field -->
+    <div class="form-group text-center mb-4">
+      <%= form.label :content, class: 'btn btn-dark w-50 mx-auto text-left' %>
+      <%= form.text_area :content, class: 'form-control w-50 mx-auto' %>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="form-group text-center mb-4">
+      <%= form.submit "Submit Review", class: 'btn btn-primary w-50' %>
+    </div>
+
   <% end %>
 
-  <div>
-    <%= form.label :rating %>
-    <%= form.number_field :rating, in: 0..5 %>
+  <!-- Back to Restaurant Button -->
+  <div class="text-center">
+    <%= link_to 'Back to Restaurant', restaurant_path(@restaurant), class: 'btn btn-secondary w-50' %>
   </div>
-
-  <div>
-    <%= form.label :content %>
-    <%= form.text_area :content %>
-  </div>
-
-  <div>
-    <%= form.submit "Submit Review" %>
-  </div>
-<% end %>
-
-<%= link_to 'Back to Restaurant', restaurant_path(@restaurant) %>
+</div>
